@@ -1,20 +1,17 @@
 import re
 import sys
 
-def wordToNumberStr(str):
-  numberDict = {
-    "one": "1",
-    "two": "2",
-    "three": "3",
-    "four": "4",
-    "five": "5",
-    "six": "6",
-    "seven": "7",
-    "eight": "8",
-    "nine": "9"
-  }
-
-  return numberDict[str]
+numberDict = {
+  "one": "1",
+  "two": "2",
+  "three": "3",
+  "four": "4",
+  "five": "5",
+  "six": "6",
+  "seven": "7",
+  "eight": "8",
+  "nine": "9"
+}
 
 def pairToNumber(pair):
   numberAsStr = ""
@@ -23,7 +20,7 @@ def pairToNumber(pair):
     if item.isdigit():
       numberAsStr += item
     else:
-      numberAsStr += wordToNumberStr(item)
+      numberAsStr += numberDict[item]
 
   return int(numberAsStr)
 
