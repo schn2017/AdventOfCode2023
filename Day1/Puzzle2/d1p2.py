@@ -20,7 +20,6 @@ def pairToNumber(pair):
   numberAsStr = ""
 
   for item in pair:
-
     if item.isdigit():
       numberAsStr += item
     else:
@@ -35,13 +34,12 @@ def main():
 
   for line in inputFile:
     sanitizedLine = line.replace("\n", "")
-    foundNumbersAsChars = ["", ""]
 
     matches = []
     for m in re.finditer('(?=([1-9]|one|two|three|four|five|six|seven|eight|nine))', sanitizedLine):
       matches.append(m.group(1))
+    
     pair = []
-
     if (len(matches) == 1): 
       pair = [matches[0], matches[0]]
     elif (len(matches) == 2):
