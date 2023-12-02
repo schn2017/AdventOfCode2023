@@ -32,22 +32,10 @@ def main():
   for line in inputFile:
     sanitizedLine = line.replace("\n", "")
 
-    matches = []
-    for m in re.finditer('(?=([1-9]|one|two|three|four|five|six|seven|eight|nine))', sanitizedLine):
-      matches.append(m.group(1))
-    
-    pair = []
-    if (len(matches) == 1): 
-      pair = [matches[0], matches[0]]
-    elif (len(matches) == 2):
-      pair = [matches[0], matches[1]]
-    elif (len(matches) >= 2):
-      pair = [matches[0], matches[len(matches) - 1]]
-
-    if (len(pair) > 0):
-      number = pairToNumber(pair)
-      sum += number
-
+    matches = re.findall('(?=([1-9]|one|two|three|four|five|six|seven|eight|nine))', sanitizedLine)
+    if (len(matches) > 0):
+      sum += pairToNumber([matches[0], matches[-1]])
+  
   inputFile.close()
   print(sum)
 
