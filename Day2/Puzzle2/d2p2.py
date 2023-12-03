@@ -7,8 +7,6 @@ sum = 0
 for line in inputFile:
   sanitizedLine = line.replace("\n", "")
   parts = sanitizedLine.split(":")
-
-  gameId = parts[0].split("Game ")[1]
   rounds = parts[1].split(";")
 
   currentGameCubes = {
