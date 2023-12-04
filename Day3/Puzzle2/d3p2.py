@@ -26,7 +26,7 @@ class PartNumber:
         return True
 
     return False
-
+  
 class Symbol:
   def __init__(self, char, row, col):
     self.char = char
@@ -58,7 +58,7 @@ def main():
 
           foundNumbers.append(PartNumber(currentNumber, row, start, col))
       else:
-        if (char != "."):
+        if (char == "*"):
           foundSymbols.append(Symbol(char, row, col))
         
         if (len(currentNumber) > 0):
@@ -73,9 +73,12 @@ def main():
 
   sum = 0
   for symbol in foundSymbols:
+    adjSides = []
     for foundNumber in foundNumbers:
       if foundNumber.isAdjacent(symbol):
-        sum += int(foundNumber.numberStr)
+        adjSides.append(int(foundNumber.numberStr))
+    if len(adjSides) == 2:
+      sum += adjSides[0] * adjSides[1]
 
   print(sum)
   inputFile.close()
