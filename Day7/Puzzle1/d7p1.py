@@ -73,7 +73,6 @@ class Hand:
   def print(self):
     print(self.hand + " " + str(self.bid) + " type: " + str(self.type))
 
-
 def main():
   inputFile = open(sys.argv[1], "r")
 
