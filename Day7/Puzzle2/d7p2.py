@@ -45,9 +45,8 @@ class Hand:
         cards[char] = 1
 
     jCount = 0
-    if "j" in cards.keys():
-      jCount = cards["j"]
-
+    if "J" in cards.keys():
+      jCount = cards["J"]
 
     cardsFound = len(cards.keys())
 
@@ -56,6 +55,7 @@ class Hand:
       return 6
     # 4 of a kind OR Full house
     elif cardsFound == 2:
+      # 4 of a kind
       for card in cards:
         if cards[card] == 4:
           # if we found a joker it is now 5 of a kind
@@ -63,40 +63,41 @@ class Hand:
             return 6
           else:
             return 5
-      if jCount > 0:
-        return 5
-      return 4
+      # Full house
+      if jCount == 0:
+        return 4
+      elif jCount == 2 or jCount == 3:
+        return 6
     # 3 of a kind OR 2 pair
     elif cardsFound == 3:
+
+      # 3 of a kind
       for card in cards:
         if cards[card] == 3:
           # now a 4 of a kind
-          if jCount > 1:
-            return 4
+          if jCount == 1 or jCount == 3:
+            return 5
           return 3
-      # now a 3 of a kind
-      if jCount > 1:
-        return 2 + jCount
+        
+      # 2 Pair
+      if jCount == 1:
+        return 4
+      elif jCount == 2:
+        return 5 
       return 2
     # 1 pair
     elif cardsFound == 4:
-      # we are now a 2 pair
-      if jCount > 0:
-        return 2
+      if jCount == 1 or jCount == 2:
+        return 3
+        
       return 1
     # 5 cards found, must be high card
     elif cardsFound == 5:
-      # we are now one of a kind
-      if jCount > 0:
+      if jCount == 1:
         return 1
-        
       return 0
 
     return 0
-
-  def print(self):
-    print(self.hand + " " + str(self.bid) + " type: " + str(self.type))
-
 
 def main():
   inputFile = open(sys.argv[1], "r")
@@ -114,7 +115,6 @@ def main():
 
   sum = 0
   for index, hand in enumerate(hands):
-    hand.print()
     sum += (index + 1) * hand.bid
 
 
