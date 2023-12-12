@@ -12,7 +12,6 @@ def main():
 
   instructions = []
   nodeDict = {}
-  rootNode = None
   currentNode = None
 
   for line in inputFile: 
