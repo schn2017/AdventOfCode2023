@@ -42,10 +42,7 @@ class Map:
         # OR if range start greate than end of the , can't be translated
 
         if currentRange[1] < rule.sourceStart or rule.sourceEnd < currentRange[0]:
-          key = str(currentRange[0]) + "," + str(currentRange[1])
-
-          if not key in translatedAlready:
-            subRanges[key] = currentRange
+          continue
         # If range fits within the entire rule, can be translated
         elif rule.sourceStart <= currentRange[0] and currentRange[1] <= rule.sourceEnd:
           newRange = [rule.getDestValue(currentRange[0]), rule.getDestValue(currentRange[1])]
@@ -80,8 +77,8 @@ class Map:
           key = str(newRange[0]) + "," + str(newRange[1])
           if not key in translatedAlready:
             subRanges[key] = newRange
-        elif rule.sourceStart <= currentRange[0] and currentRange[1] <= rule.sourceEnd:
-          newRange = [rule.getDestValue(currentRange[0]), rule.getDestValue(currentRange[1])]
+        elif rule.sourceStart < currentRange[0] and rule.sourceEnd < currentRange[1]:
+          newRange = [rule.getDestValue(currentRange[0]), rule.getDestValue(rule.sourceEnd)]
           key = str(newRange[0]) + "," + str(newRange[1])
           if not key in translatedAlready:
             subRanges[key] = newRange       
