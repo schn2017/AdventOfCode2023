@@ -28,24 +28,28 @@ class Sequence:
 
   def predictValue(self):
     offset = 0
+    diffs = list(reversed(self.differences))
+    for index in range(len(diffs)):
+      if index == 0:
+        offset = diffs[index][1]
+      else:
+        offset = diffs[index][0] - offset
 
-    for diff in self.differences:
-      offset += diff[-1]
-
-    return self.numbers[-1] + offset
+    return self.numbers[0] - offset
 
 
 def main():
   inputFile = open(sys.argv[1], "r")
 
   sum = 0
-  for line in inputFile: 
+  for line in inputFile:  
     sanitizedLine = line.replace("\n", "")
     numbers = sanitizedLine.split(" ")
     
     sequence = Sequence(numbers)
     sequence.getDifferences()
     sum += sequence.predictValue()
+  print("sum")
   print(sum)
 
 if __name__ == "__main__":
